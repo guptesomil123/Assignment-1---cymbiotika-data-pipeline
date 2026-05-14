@@ -192,8 +192,6 @@ def _paginate_orders(
 # SECTION 6: FIELD NORMALISATION
 # =============================================================================
 # Converts both API schemas to consistent snake_case and adds week_start.
-# Spend uses snake_case; orders use camelCase — normalised here so downstream
-# code only ever sees one schema.
 # =============================================================================
 
 def _normalise_spend(row: dict) -> dict:
@@ -270,7 +268,7 @@ def fetch_orders(session, base_url, start_date, end_date) -> pd.DataFrame:
 # =============================================================================
 # SECTION 8: JOIN — build the weekly performance table
 # =============================================================================
-# Aggregates both datasets to campaign x week grain, then merges them.
+# Aggregates both datasets to campaign x week grain
 # Left join so campaigns with spend but zero attributed orders still appear.
 # ROAS = revenue / spend; None when spend is zero (not 0, which is misleading).
 # =============================================================================
